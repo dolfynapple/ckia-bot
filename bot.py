@@ -1,5 +1,6 @@
 import discord
 import responses
+import configparser
 
 
 async def send_message(user_id, msg, user_msg, is_private):
@@ -14,9 +15,13 @@ async def send_message(user_id, msg, user_msg, is_private):
 
 
 def run_discord_bot():
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+
+    bot_token = config['BotConfig']['token']
     intents = discord.Intents.default()
     intents.message_content = True
-    TOKEN = 'MTExOTExNDM5MDAxNzQwOTA0NA.GqbRpe.9UxliMNs0g-2pbuxq89aSVmM_qmvPGojgFBP10'
+    TOKEN = bot_token
     client = discord.Client(intents=intents)
 
     @client.event
